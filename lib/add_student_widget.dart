@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_database/db/functions/db_functions.dart';
 import 'package:hive_database/db/model/data_model.dart';
+import 'package:hive_database/list_student_widget.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddStudentWidget extends StatefulWidget {
@@ -19,6 +20,8 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
   final _nameController = TextEditingController();
 
   final _ageController = TextEditingController();
+
+  final _placeController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -46,6 +49,14 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Age',
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _placeController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Place',
             ),
           ),
           const SizedBox(height: 10),
@@ -79,16 +90,20 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
   Future<void> onAddStudentButtonClicked() async {
     final _name = _nameController.text.trim();
     final _age = _ageController.text.trim();
+    final _place = _placeController.text.trim();
 
-    if (_name.isEmpty || _age.isEmpty) {
+    if (_name.isEmpty || _age.isEmpty || _place.isEmpty) {
       return;
     }
-    log('$_name $_age');
+    log('$_name $_age $_place');
 
-    final _student = StudentModel(name: _name, age: _age, imagepath: picture);
+    final _student =
+        StudentModel(name: _name, age: _age, place: _place, imagepath: picture);
     addStudent(_student);
     _nameController.clear();
     _ageController.clear();
+    _placeController.clear();
+    Navigator.pop(context);
   }
 
   Future<void> _getImage() async {

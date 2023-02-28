@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_database/db/model/data_model.dart';
-import 'package:hive_database/screen_home.dart';
+import 'package:hive_database/screen/screen_home.dart';
 import 'package:hive_flutter/adapters.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // initializing Hive
   await Hive.initFlutter();
+
   if (!Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
     Hive.registerAdapter(StudentModelAdapter());
   }
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ScreenHome(),
+      home: ScreenHome(),
     );
   }
 }

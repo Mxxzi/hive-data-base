@@ -13,8 +13,15 @@ class StudentModel extends HiveObject {
   final String age;
 
   @HiveField(3)
+  final String place;
+
+  @HiveField(4)
   dynamic imagepath;
 
   StudentModel(
-      {required this.name, required this.age, this.id, this.imagepath});
+      {required this.name,
+      required this.age,
+      required this.place,
+      this.id,
+      this.imagepath});
 }

@@ -19,15 +19,16 @@ class StudentModelAdapter extends TypeAdapter<StudentModel> {
     return StudentModel(
       name: fields[1] as String,
       age: fields[2] as String,
+      place: fields[3] as String,
       id: fields[0] as int?,
-      imagepath: fields[3] as dynamic,
+      imagepath: fields[4] as dynamic,
     );
   }
 
   @override
   void write(BinaryWriter writer, StudentModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,6 +36,8 @@ class StudentModelAdapter extends TypeAdapter<StudentModel> {
       ..writeByte(2)
       ..write(obj.age)
       ..writeByte(3)
+      ..write(obj.place)
+      ..writeByte(4)
       ..write(obj.imagepath);
   }
 
