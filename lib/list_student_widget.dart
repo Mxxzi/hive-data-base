@@ -18,7 +18,7 @@ class ListStudentWidget extends StatefulWidget {
 
 class _ListStudentWidgetState extends State<ListStudentWidget> {
   TextEditingController searchController = TextEditingController();
-  // bool _validation = false;
+  bool _validation = false;
 
   List<Widget> rowList = [];
 
@@ -31,11 +31,12 @@ class _ListStudentWidgetState extends State<ListStudentWidget> {
           .name
           .toLowerCase()
           .contains(searchController.text.toString())) {
-        // _validation = false;
+        _validation = false;
         rowList.add(buildStudentWidget(i, studentList));
-      } else {
-        // _validation = true;
       }
+      //  else {
+      //   _validation = true;
+      // }
       // log('invalid $_validation');
     }
   }
@@ -66,8 +67,7 @@ class _ListStudentWidgetState extends State<ListStudentWidget> {
                     hintStyle: new TextStyle(color: Colors.blue)),
               ),
               Column(
-                // children: _validation ? [Text('invalid item list')] :
-                children: rowList,
+                children: _validation ? [Text('invalid item list')] : rowList,
               )
             ],
           ),
